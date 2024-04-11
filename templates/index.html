@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aggiungi Testo con Flask</title>
+</head>
+<body>
+    <table style="width:100%">
+        <tr>
+          <th colspan="3" style="text-align:left;"><h2>Allenamento A</h2></th>
+        </tr>
+    <form action="/aggiungi_esercizio" method="post">
+        <input type="text" name="nuovo_testo" placeholder="Inserisci il testo qui" required>
+        <button type="">Aggiungi Testo</button>
+    </form>
+
+    <h2>Testi Aggiunti:</h2>
+    
+        {% for testo in testi_aggiunti %}
+        <th colspan="2" style="text-align:left"><h5>es:1 Top_xt</h5> </th>
+    </tr>
+    <tr>
+      <td>durata:4 min</td>
+      <td>pausa........min.</td>
+    </tr>
+    <tr>
+      <td>    </td>
+      <td>pulsaz........bpm</td>
+    </tr>
+    <tr>
+      <td colspan="2">nota lv2</td>
+    </tr>
+        {% endfor %}
+    
+    </table>
+</body>
+</html>
