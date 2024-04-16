@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Condizione con Jinja2</title>
+</head>
+<body>
+    {% if elementi %}
+        <h1>La lista non è vuota</h1>
+        <ul>
+            {% for elemento in elementi %}
+            <li>{{ elemento }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h1>La lista è vuota</h1>
+        <p>Non ci sono elementi nella lista.</p>
+    {% endif %}
+</body>
+</html>

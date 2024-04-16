@@ -23,32 +23,40 @@
     <form action="/secondaria" method="get">
         <button type="submit">Vai alla Pagina di Destinazione</button>
     </form>
-    <table>
-        <tr>
-          <td style="width:20%" rowspan="4"><img src="1.jpg" alt="Top_xt" ></td>
-        <th colspan="2" style="text-align:left"><h5>es:1 Top_xt</h5> </th>
-        
-        </tr>
-        <tr>
-          <td>{{p11}}</td>
-          <td>{{p12}}</td>
+    <h1>Dati ricevuti dalla Pagina Primaria:</h1>
+    <p>Dato 1: {{ dati['dato1'] }}</p>
+    <p>Dato 2: {{ dati['dato2'] }}</p>
+    {% if lista_esercizii %}
+      {% for dati in lista_esercizii %}
+      <table>
+          <tr>
+            <td style="width:20%" rowspan="4"><img src="1.jpg" alt="Top_xt" ></td>
+          <th colspan="2" style="text-align:left"><h5>es:1 Top_xt</h5> </th>
           
-        </tr>
-        <tr>
-          <td>{{p21}}</td>
-          <td>{{p22}}</td>
-          
-        </tr>
-        <tr>
-            <td>{{p31}}</td>
-            <td>{{p32}}</td>
+          </tr>
+          <tr>
+            <td>{{dati['p11']}}</td>
+            <td>{{dati['p12']}}</td>
             
           </tr>
-        <tr>
-          <td>{{attrezzo}}</td>
-          <td colspan="2">{{nota}}</td>
-        </tr>
-        </table>
-    
+          <tr>
+            <td>{{dati['p21']}}</td>
+            <td>{{dati['p22']}}</td>
+            
+          </tr>
+          <tr>
+              <td>{{dati['p31']}}</td>
+              <td>{{dati['p32']}}</td>
+              
+            </tr>
+          <tr>
+            <td>{{dati['attrezzo']}}</td>
+            <td colspan="2">{{dati['nota']}}</td>
+          </tr>
+          </table>
+      {% endfor %}
+    {% else %}
+     <p>iniziamo</p>
+    {% endif %}
 </body>
 </html>
