@@ -1,0 +1,34 @@
+
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Crea la tua scheda</title>
+  </head>
+  <body>
+      <h1>Benvenuto alla Home Page</h1>
+      <p><a href="{{ url_for('altro') }}">Vai alla pagina successiva</a></p>
+      <h1>Aggiungi Testo</h1>
+    <h2>Testi Aggiunti:</h2>
+    <table style="width:100%">
+      <ul>
+          {% for testo in testi_aggiunti %}
+          <th colspan="2" style="text-align:left"><h5>es:1 Top_xt</h5> </th>
+      </tr>
+      <tr>
+        <td><input type="text" id="testo" name="testo"></td>
+        <td><input type="text" id="testo" name="testo"></td>
+      </tr>
+      <tr>
+        <td>    </td>
+        <td><input type="text" id="testo" name="testo"></td>
+      </tr>
+      <tr>
+        <td colspan="2"><input type="text" id="testo" name="testo"></td>
+      </tr>
+          {% endfor %}
+      </ul>
+  </table>
+  </body>
+  </html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu a Tendina</title>
+    <script>
+        function mostraInput() {
+            var scelta = document.getElementById("scelta");
+            var inputOpzionePersonalizzata = document.getElementById("opzione_personalizzata");
+            
+            if (scelta.value === "opzione3") {
+                inputOpzionePersonalizzata.style.display = "block";
+            } else {
+                inputOpzionePersonalizzata.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Scegli un'opzione:</h1>
+    <form action="/processa_scelta" method="post" onsubmit="mostraInput()">
+        <label for="scelta">Seleziona un'opzione:</label>
+        <select id="scelta" name="scelta" onchange="mostraInput()">
+            <option value="opzione1">Opzione 1</option>
+            <option value="opzione2">Opzione 2</option>
+            <option value="opzione3">Opzione Personalizzata</option>
+        </select>
+        <br>
+        <label for="opzione_personalizzata" id="label_opzione_personalizzata" style="display: none;">Opzione Personalizzata:</label>
+        <input type="text" id="opzione_personalizzata" name="opzione_personalizzata" style="display: none;">
+        <button type="submit">Conferma</button>
+    </form>
+</body>
+</html>

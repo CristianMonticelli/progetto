@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        img {
+          width: 100%;
+        }
+        table, th, td {
+          border: 1px solid rgb(0, 0, 0);
+          border-collapse: collapse;
+        }
+        th, td {
+          background-color: hwb(0 100% 0%);
+        }
+        </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina Iniziale</title>
+</head>
+<body>
+    <h1>Benvenuto alla Pagina Iniziale</h1>
+    
+    <form action="/secondaria" method="get">
+        <button type="submit">Vai alla Pagina di Destinazione</button>
+    </form>
+    <table>
+        <tr>
+          <td style="width:20%" rowspan="4"><img src="1.jpg" alt="Top_xt" ></td>
+        <th colspan="2" style="text-align:left"><h5>es:1 Top_xt</h5> </th>
+        
+        </tr>
+        <tr>
+          <td>{{p11}}</td>
+          <td>{{p12}}</td>
+          
+        </tr>
+        <tr>
+          <td>{{p21}}</td>
+          <td>{{p22}}</td>
+          
+        </tr>
+        <tr>
+            <td>{{p31}}</td>
+            <td>{{p32}}</td>
+            
+          </tr>
+        <tr>
+          <td>{{attrezzo}}</td>
+          <td colspan="2">{{nota}}</td>
+        </tr>
+        </table>
+    
+</body>
+</html>

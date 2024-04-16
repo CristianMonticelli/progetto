@@ -1,28 +1,33 @@
-from flask import Flask, send_from_directory, url_for, render_template
-from markupsafe import escape
-
-# import matplotlib.pyplot as plt
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
+testi_aggiunti = []
+@app.route('/')
+def index():
+    return render_template('index.html', testi_aggiunti=testi_aggiunti)
+
+@app.route('/aggiungi_testo', methods=['POST'])
+def aggiungi_testo():
+    # testo = request.form['nuovo_testo']
+    testo = "ciao"
+    testi_aggiunti.append(testo)
+    return render_template('index.html', testi_aggiunti=testi_aggiunti)
 
 
-@app.route("/")
-def hello_world():
-    return render_template("hello.html")
+@app.route('/processa_scelta', methods=['POST'])
+def processa_scelta():
+    scelta = request.form['scelta']
+    if scelta == 'Serie':
+        messaggio = "Serie."
+    elif scelta == 'Durata':
+        messaggio = "Durata"
+    elif scelta == 'opzione3':
+        opzione_personalizzata = request.form['personalizzata']
+        messaggio = opzione_personalizzata
 
+    else:
+        messaggio = "Scelta non valida."
+    return messaggio
 
-@app.route("/hello/")
-@app.route("/hello/<name>")
-def hello(name=None):
-    return render_template("hello.html")
-
-
-@app.route("/listastudenti")
-def print_students():
-    students = ["Ana", "Ion", "Maria", "George"]
-    return render_template("students.html", students=students)
-
-
-@app.route("/square_number/<int:number>")
-def square_number(number):
-    return f"The square of {number} is {number**2}!"
+if __name__ == '__main__':
+    app.run(debug=True)
