@@ -2,58 +2,88 @@
 <html lang="en">
 <head>
     <style>
+       .linea-custom {
+            border-top: 1px solid black; /* Spessore e colore della linea */
+            margin-top: 20px; /* Distanza dal titolo */
+            margin-bottom: 20px;
+            width: 40%; /* Distanza dal contenuto successivo */
+        }
+        
+        .indice{
+          background-color: blue;
+          border: 1px solid rgba(0, 0, 0, 0);
+          border-collapse: collapse;
+          padding: 5px 15px 5px 15px;
+    
+          width: 100%;
+          
+        }
+        .bottoni-indice{
+          background-color:blue ;
+          color: white;
+          border: 2px solid rgb(56, 124, 207);
+          align-items: left;
+        }
         img {
           width: 100%;
         }
-        table, th, td {
-          border: 1px solid rgb(0, 0, 0);
-          border-collapse: collapse;
-        }
-        th, td {
-          background-color: hwb(0 100% 0%);
-        }
+        
         </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagina Iniziale</title>
+  
 </head>
 <body>
-    <h1>Benvenuto alla Pagina Iniziale</h1>
     
-    <form action="/secondaria" method="get">
-        <button type="submit">Vai alla Pagina di Destinazione</button>
-    </form>
-    <h1>Dati ricevuti dalla Pagina Primaria:</h1>
-    <p>Dato 1: {{ dati['dato1'] }}</p>
-    <p>Dato 2: {{ dati['dato2'] }}</p>
+    <table class="indice"><tr>
+    <tr>
+      <td colspan="2" style="width: 100%; height: 40px;"></td>
+    </tr>
+    <tr>
+    <td style="padding: 0px;
+    margin: 0px;" >
+    <form action="/aggiungi_titoletto" method="post">
+      <button class="bottoni-indice" type="submit">titoletto</button>
+    </form></td>
+
+    <td><form action="/secondaria" method="get">
+        <button class="bottoni-indice" type="submit">Vai alla Pagina di Destinazione</button>
+    </form></td></tr>
+
+    </tr></table>
     {% if lista_esercizii %}
       {% for dati in lista_esercizii %}
-      <table>
-          <tr>
-            <td style="width:20%" rowspan="4"><img src="1.jpg" alt="Top_xt" ></td>
-          <th colspan="2" style="text-align:left"><h5>es:1 Top_xt</h5> </th>
-          
-          </tr>
-          <tr>
-            <td>{{dati['p11']}}</td>
-            <td>{{dati['p12']}}</td>
-            
-          </tr>
-          <tr>
-            <td>{{dati['p21']}}</td>
-            <td>{{dati['p22']}}</td>
-            
-          </tr>
-          <tr>
-              <td>{{dati['p31']}}</td>
-              <td>{{dati['p32']}}</td>
+        {% if dati is mapping %}
+          <table>
+              <tr>
+                <td style="width: auto;height: auto;" rowspan="4"><img src="1.jpg" alt="Top_xt" ></td>
+              <th colspan="2" style="text-align:left"><h5>es:1 Top_xt</h5> </th>
               
-            </tr>
-          <tr>
-            <td>{{dati['attrezzo']}}</td>
-            <td colspan="2">{{dati['nota']}}</td>
-          </tr>
-          </table>
+              </tr>
+              <tr style="width: auto;height: auto;">
+                <td>{{dati['p11']}}</td>
+                <td>{{dati['p12']}}</td>
+                
+              </tr>
+              <tr style="width: auto;height: auto;">
+                <td>{{dati['p21']}}</td>
+                <td>{{dati['p22']}}</td>
+                
+              </tr>
+              <tr style="width: auto;height: auto;">
+                  <td>{{dati['p31']}}</td>
+                  <td>{{dati['p32']}}</td>
+                  
+                </tr>
+              <tr style="width: auto;height: auto;">
+                <td>{{dati['attrezzo']}}</td>
+                <td colspan="2">{{dati['nota']}}</td>
+              </tr>
+              </table>
+            {% else %}
+            <h2>Titolo</h2> <!-- Il titolo rimane invariato -->
+            <div class="linea-custom"></div>
+            {% endif %}
       {% endfor %}
     {% else %}
      <p>iniziamo</p>

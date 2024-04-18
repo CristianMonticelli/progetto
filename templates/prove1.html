@@ -3,19 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Condizione con Jinja2</title>
+    <title>Linea Orizzontale</title>
+    <style>
+        hr {
+            position: absolute;
+            width: 100%; /* Imposta la larghezza della linea al 100% del contenitore */
+            border: none;
+            border-top: 1px solid black;
+            top: 50px; /* Altezza della linea sopra il titolo (regolare secondo necessità) */
+            z-index: 1; /* Assicura che la linea sia posizionata sopra il contenuto */
+        }
+        h1 {
+            position: relative; /* Imposta la posizione relativa per consentire il posizionamento assoluto della linea */
+            z-index: 2; /* Assicura che il titolo sia posizionato sopra la linea */
+        }
+    </style>
 </head>
 <body>
-    {% if elementi %}
-        <h1>La lista non è vuota</h1>
-        <ul>
-            {% for elemento in elementi %}
-            <li>{{ elemento }}</li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <h1>La lista è vuota</h1>
-        <p>Non ci sono elementi nella lista.</p>
-    {% endif %}
+    <h1>Titolo</h1> <!-- Il titolo rimane invariato -->
+    <hr> <!-- Questa è la linea orizzontale sopra il titolo -->
+    <p>Contenuto del paragrafo.</p>
 </body>
 </html>

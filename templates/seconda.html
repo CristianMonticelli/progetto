@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>
+      function mostraInput() {
+          var scelta = document.getElementById("scelta");
+          var inputOpzionePersonalizzata = document.getElementById("opzione_personalizzata");
+          
+          if (scelta.value === "opzione3") {
+              inputOpzionePersonalizzata.style.display = "block";
+          } else {
+              inputOpzionePersonalizzata.style.display = "none";
+          }
+      }
+    </script>
     <style>
         img {
           width: 100%;
@@ -24,11 +36,19 @@
         <table>
             <tr>
               <td style="width:20%" rowspan="4"><img src="1.jpg" alt="Top_xt" ></td>
-            <th colspan="2" style="text-align:left"><h5>es:1 Top_xt</h5> </th>
+            <th colspan="2" style="text-align:left"><h5><input size="94" maxlength="94" type="text" id="nome_esercizio" name="nome_esercizio"></h5> </th>
             
             </tr>
             <tr>
-              <td><input size="44" maxlength="44" type="text" id="11" name="11"></td>
+
+              <td><label for="scelta">Seleziona un'opzione:</label>
+                <select id="scelta" name="scelta" onchange="mostraInput()">
+                    <option value="Serie">Serie</option>
+                    <option value="Durata">Durata</option>
+                    <option value="opzione3">Opzione Personalizzata</option>
+                </select>
+                <input type="text" id="opzione_personalizzata" name="opzione_personalizzata" placeholder="Inserisci un'opzione personalizzata" style="display: none;"></td>
+
               <td><input size="44" maxlength="44" type="text" id="12" name="12"></td>
               
             </tr>

@@ -31,7 +31,11 @@ def index():
 def pagina_destinazione():
     return render_template('seconda.html')
 
-
+@app.route('/aggiungi_titoletto', methods=['POST'])
+def aggiungi_titoletto():
+    numero = 0
+    lista_esercizii.append(numero+1)
+    return render_template('primaria.html', lista_esercizii=lista_esercizii)
 
 if __name__ == '__main__':
     app.run(debug=True)

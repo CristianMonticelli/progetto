@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Campo di testo riscrivibile</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Divisori nel ciclo for con Jinja2</title>
 </head>
 <body>
-
-<label for="testo">Inserisci del testo:</label>
-<input type="text" id="testo" name="testo">
-
+    <h1>Elementi della lista:</h1>
+    <ul>
+        {% for elemento in lista %}
+            <li>{{ elemento }}</li>
+            {% if not loop.last %}
+                <hr> <!-- Divisore tra gli elementi, tranne l'ultimo -->
+            {% endif %}
+        {% endfor %}
+    </ul>
 </body>
-</html
+</html>
