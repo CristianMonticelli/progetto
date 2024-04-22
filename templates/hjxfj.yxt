@@ -20,9 +20,37 @@
 </head>
 <body>
     <h1>Sei stato reindirizzato alla Pagina di iniziale!</h1>
-
     <form action="/" method="post">
-              <table style="width: 100%;">
+      {% if prefabbricato is mapping %}
+      <table>
+        <tr>
+          <td style="width: auto;height: auto;" rowspan="4"><img src="1.jpg" alt="Top_xt" ></td>
+        <th colspan="2" style="text-align:left"><h5>es:1 Top_xt</h5> </th>
+        
+        </tr>
+        <tr style="width: auto;height: auto;">
+          <td>{{dati['p11']}}</td>
+          <td>{{dati['p12']}}</td>
+          
+        </tr>
+        <tr style="width: auto;height: auto;">
+          <td>{{dati['p21']}}</td>
+          <td>{{dati['p22']}}</td>
+          
+        </tr>
+        <tr style="width: auto;height: auto;">
+            <td>{{dati['p31']}}</td>
+            <td>{{dati['p32']}}</td>
+            
+          </tr>
+        <tr style="width: auto;height: auto;">
+          <td>{{dati['attrezzo']}}</td>
+          <td colspan="2">{{dati['nota']}}</td>
+        </tr>
+        </table>
+      {% else %}
+
+        <table style="width: 100%;">
             <tr>
               <td style="width:20%;" rowspan="4"><img src="1.jpg" alt="Top_xt" ></td>
               <th colspan="2" style="text-align:left"><h5><input size="94" maxlength="94" type="text" id="nome_esercizio" name="nome_esercizio"></h5> </th>
@@ -50,33 +78,36 @@
         </table>
         
         <button type="submit">Vai alla Pagina di iniziale</button>
-            </form>
-        <table style="width: 50%;">
+        {% endif %}
+    </form>
+    <form action="/prefabbricato" method="post">
+    <table style="width: 50%;">
       <tr>
-        <td style="width:20%" rowspan="4"><img src="1.jpg" alt="Top_xt" ></td>
+        <td style="width:20%" rowspan="4"><img src="" alt="panca" ></td>
       <th colspan="2" style="text-align:left"><h5><input size="94" maxlength="94" type="text" id="nome_esercizio" name="nome_esercizio"></h5> </th>
       
       </tr>
       <tr>
-        <td><input size="44" maxlength="44" type="text" id="11" name="11" placeholder="ciao"></td>
-        <td><input size="44" maxlength="44" type="text" id="12" name="12"></td>
+        <td>Serie<input size="auto" maxlength="44" type="text" id="11panca" name="11panca">rip.</td>
+        <td>Recupero<input size="auto" maxlength="44" type="text" id="12panca" name="12panca">min.</td>
         
       </tr>
       <tr>
-        <td><input size="44" maxlength="44" type="text" id="21" name="21"></td>
-        <td><input size="44" maxlength="44" type="text" id="22" name="22"></td>
+        <td>Pausa<input size="auto" maxlength="40" type="text" id="21panca" name="21panca" >min.</td>
+        <td>Carico<input size="auto" maxlength="40" type="text" id="22panca" name="22panca" >Kg</td>
         
       </tr>
       <tr>
-          <td><input size="44" maxlength="44" type="text" id="31" name="31"></td>
-          <td><input size="44" maxlength="44" type="text" id="32" name="32"></td>
+          <td><input size="auto" maxlength="40" type="text" id="31panca" name="31panca"></td>
+          <td><input size="auto" maxlength="40" type="text" id="32panca" name="32panca"></td>
           
         </tr>
       <tr>
-        <td><input size="19" maxlength="19"type="text" id="attrezzo" name="attrezzo"></td>
-        <td colspan="2"><input size="94" maxlength="94" type="text" id="nota" name="nota"></td>
+        <td>Panca<input size="auto" maxlength="20"type="text" id="attrezzopanca" name="attrezzopanca"></td>
+        <td colspan="2"><input size="auto" maxlength="90" type="text" id="notapanca" name="notapanca"></td>
       </tr>
   </table>
-  
+  <button type="submit">usa questi</button>
+</form>
 </body>
 </html>

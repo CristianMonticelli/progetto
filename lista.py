@@ -29,13 +29,30 @@ def index():
 # Pagina di destinazione
 @app.route('/secondaria')
 def pagina_destinazione():
-    return render_template('seconda.html')
+    lista_prefabbricati = None
+    return render_template('seconda.html', lista_prefabbricati=lista_prefabbricati)
 
 @app.route('/aggiungi_titoletto', methods=['POST'])
 def aggiungi_titoletto():
     numero = 0
     lista_esercizii.append(numero+1)
     return render_template('primaria.html', lista_esercizii=lista_esercizii)
+
+@app.route('/prefabbricato',methods=['POST'])
+def prefabbricato():
+    lista_prefabbricati = {}
+    lista_prefabbricati = {
+        'p11' : request.form['11panca'],
+        'p12' : request.form['12panca'],
+        'p21' : request.form['21panca'],
+        'p22' : request.form['22panca'],
+        'p31' : request.form['31panca'],
+        'p32' : request.form['32panca'],
+        'attrezzo' : request.form['attrezzopanca'],
+        'nota' : request.form['notapanca']}
+
+    return render_template('secondaria.html',lista_prefabbricati=lista_prefabbricati)
+
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,37 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<style>
-img {
-  width: 100%;
-}
-table, th, td {
-  border: 1px solid rgb(0, 0, 0);
-  border-collapse: collapse;
-}
-th, td {
-  background-color: hwb(0 100% 0%);
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
 </head>
 <body>
-<table>
-<tr>
-  <td style="width:20%" rowspan="3"><img src="1.jpg" alt="Top_xt" ></td>
-<th colspan="2" style="text-align:left"><h5>es:1 Top_xt</h5> </th>
-
-</tr>
-<tr>
-  <td>durata:4 min</td>
-  <td>pausa........min.</td>
-</tr>
-<tr>
-  <td>    </td>
-  <td>pulsaz........bpm</td>
-</tr>
-<tr>
-  <td>attrezzo</td>
-  <td colspan="2">nota lv2</td>
-</tr>
-</table>
+    <h1>Login</h1>
+    <form action="/process" method="POST">
+        <input type="hidden" name="form_type" value="login">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+        <button type="submit">Login</button>
+    </form>
+    
+    <form action="/process" method="post">
+        <input type="hidden" name="form_type" value="registration">
+        <label for="username_reg">Username:</label>
+        <input type="text" id="username_reg" name="username" required><br><br>
+        <label for="password_reg">Password:</label>
+        <input type="password" id="password_reg" name="password" required><br><br>
+        <button type="submit">Registrati</button>
+    </form>
 </body>
+</html>
