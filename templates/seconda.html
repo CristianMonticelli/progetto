@@ -21,62 +21,92 @@
 <body>
     <h1>Sei stato reindirizzato alla Pagina di iniziale!</h1>
 
-    <form action="/" method="post">
-              <table style="width: 100%;">
-            <tr>
-              <td style="width:20%;" rowspan="4"><img src="1.jpg" alt="Top_xt" ></td>
-              <th colspan="2" style="text-align:left"><h5><input size="94" maxlength="94" type="text" id="nome_esercizio" name="nome_esercizio"></h5> </th>
+    <form action="/primaria" method="post">
+              
             
-            </tr>
-            <tr>
-              <td style="width:40%;"><input size="100%" maxlength="44" type="text" id="11" name="11" value={{predefinito11}}></td>
-              <td style="width:40%;"><input size="100%" maxlength="44" type="text" id="12" name="12" value={{predefinito11}}></td>
               
-            </tr>
-            <tr>
-              <td style="width:40%;"><input size="100%" maxlength="44" type="text" id="21" name="21" value={{predefinito21}}></td>
-              <td style="width:40%;"><input size="100%" maxlength="44" type="text" id="22" name="22" value={{predefinito32}}></td>
-              
-            </tr>
-            <tr>
-                <td style="width:40%;"><input size="100%" maxlength="44" type="text" id="31" name="31" value={{predefinito31}}></td>
-                <td style="width:40%;"><input size="100%" maxlength="44" type="text" id="32" name="32" value={{predefinito32}}></td>
-                
-              </tr>
-            <tr>
-              <td style="width:20%;"><input size="100%" maxlength="19"type="text" id="attrezzo" name="attrezzo" value={{predefinitoattrezzo}}></td>
-              <td colspan="2" style="width:80%"><input size="auto" maxlength="94" type="text" id="nota" name="nota" value={{predefinitoattrezzo}}></td>
-            </tr>
+            <h5><input size="100%" type="text" id="titolo" name="titolo"></h5>
+            
+            <div>
+              <input size="50%" stype="text" id="11" name="11" value={{predefinito11}}>
+              <input size="50%" type="text" id="12" name="12" value={{predefinito11}}>
+            </div>  
+            <div>
+              <input size="50%" maxlength="44" type="text" id="21" name="21" value={{predefinito21}}>
+              <input size="50%" maxlength="44" type="text" id="22" name="22" value={{predefinito32}}>
+            </div>  
+            <div>
+                <input size="50%" maxlength="44" type="text" id="31" name="31" value={{predefinito31}}>
+                <input size="50%" maxlength="44" type="text" id="32" name="32" value={{predefinito32}}>
+            </div>
+            
+              <input  size="100%" type="text" id="attrezzo" name="attrezzo" value={{predefinitoattrezzo}}><br>
+              <input  size="100%"  type="text" id="nota" name="nota" value={{predefinitoattrezzo}}><br>
+            
         </table>
         
-        <button type="submit">Vai alla Pagina di iniziale</button>
+        <button type="submit">ok</button>
+
             </form>
-        <table style="width: 50%;">
-      <tr>
-        <td style="width:20%" rowspan="4"><img src="1.jpg" alt="Top_xt" ></td>
-      <th colspan="2" style="text-align:left"><h5><input size="94" maxlength="94" type="text" id="nome_esercizio" name="nome_esercizio"></h5> </th>
-      
-      </tr>
-      <tr>
-        <td><input size="44" maxlength="44" type="text" id="11" name="11" placeholder="ciao"></td>
-        <td><input size="44" maxlength="44" type="text" id="12" name="12"></td>
-        
-      </tr>
-      <tr>
-        <td><input size="44" maxlength="44" type="text" id="21" name="21"></td>
-        <td><input size="44" maxlength="44" type="text" id="22" name="22"></td>
-        
-      </tr>
-      <tr>
-          <td><input size="44" maxlength="44" type="text" id="31" name="31"></td>
-          <td><input size="44" maxlength="44" type="text" id="32" name="32"></td>
+
+            <form action="/predefiniti" method="post">
+              {% if lista_esercizii %}
+      {% for dati in lista_esercizii %}
+        {% if dati is mapping %}
+        <button type="submit">
+          <h5>{{dati['titolo']}}</h5>
+              
+              <div>
+                {{dati['p11']}}
+                {{dati['p12']}}
+              </div>  
+              <div>
+                {{dati['p21']}}
+                {{dati['p22']}}
+              </div>  
+              <div>
+                {{dati['p31']}}
+                {{dati['p32']}}
+              </div>
+              
+              {{dati['attrezzo']}}
+              {{dati['nota']}}
           
-        </tr>
-      <tr>
-        <td><input size="19" maxlength="19"type="text" id="attrezzo" name="attrezzo"></td>
-        <td colspan="2"><input size="94" maxlength="94" type="text" id="nota" name="nota"></td>
-      </tr>
-  </table>
-  
-</body>
-</html>
+      </table>
+      </button>
+      
+          </form>
+            
+            {% endif %}
+      {% endfor %}
+    {% else %}
+     
+    {% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+              
+        

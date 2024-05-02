@@ -34,52 +34,49 @@
   
 </head>
 <body>
+    <div>
     
-    <table class="indice"><tr>
-    <tr>
-      <td colspan="2" style="width: 100%; height: 40px;"></td>
-    </tr>
-    <tr>
-    <td style="padding: 0px;
-    margin: 0px;" >
+    
     <form action="/aggiungi_titoletto" method="post">
       <button class="bottoni-indice" type="submit">titoletto</button>
-    </form></td>
+    </form>
 
-    <td><form action="/secondaria" method="get">
+    <form action="/secondaria" method="get">
         <button class="bottoni-indice" type="submit">Vai alla Pagina di Destinazione</button>
-    </form></td></tr>
+    </form>
+    {% for cliente in clienti %} 
+    <form action="/" method="get">
+      <button class="bottoni-indice" type="submit">{{cliente}}</button>
+  </form>
+  </div>
 
     </tr></table>
     {% if lista_esercizii %}
       {% for dati in lista_esercizii %}
         {% if dati is mapping %}
-          <table>
-              <tr>
-                <td style="width: auto;height: auto;" rowspan="4"><img src="1.jpg" alt="Top_xt" ></td>
-              <th colspan="2" style="text-align:left"><h5>es:1 Top_xt</h5> </th>
+          
+            
+              <h5>{{dati['titolo']}}</h5>
               
-              </tr>
-              <tr style="width: auto;height: auto;">
-                <td>{{dati['p11']}}</td>
-                <td>{{dati['p12']}}</td>
-                
-              </tr>
-              <tr style="width: auto;height: auto;">
-                <td>{{dati['p21']}}</td>
-                <td>{{dati['p22']}}</td>
-                
-              </tr>
-              <tr style="width: auto;height: auto;">
-                  <td>{{dati['p31']}}</td>
-                  <td>{{dati['p32']}}</td>
-                  
-                </tr>
-              <tr style="width: auto;height: auto;">
-                <td>{{dati['attrezzo']}}</td>
-                <td colspan="2">{{dati['nota']}}</td>
-              </tr>
-              </table>
+              <div>
+                {{dati['p11']}}
+                {{dati['p12']}}
+              </div>  
+              <div>
+                {{dati['p21']}}
+                {{dati['p22']}}
+              </div>  
+              <div>
+                {{dati['p31']}}
+                {{dati['p32']}}
+              </div>
+              
+              {{dati['attrezzo']}}
+              {{dati['nota']}}
+              
+        
+          
+              </form>
             {% else %}
             <h2>{{dati}} Titolo</h2> 
             <div class="linea-custom"></div>
