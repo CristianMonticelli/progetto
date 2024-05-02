@@ -16,19 +16,15 @@ def index():
 
 @app.route('/login', methods=['POST'])
 def login():
-    name = request.form['name']
-    surname = request.form['surname']
+    username = request.form['username']
     gym = request.form['gym']
-    password = request.form['password']
+    email = request.form['email']
     global registered_users
-    if name=='io' and surname=='io' and password=='password':
-        return render_template('io.html')
-    if name=='capo' and surname=='capo' and password=='password':
-        return render_template('capo.html')
+    
 
     if gym in registered_users:
         for user in registered_users[gym]:
-            if user['name'] == name and user['surname'] == surname and user['password'] == password:
+            if user['username'] == username and user['password'] == password:
                 return 'Login successful!'
     return render_template('errorereg.html')
 
@@ -38,8 +34,8 @@ def pagina_di_registrazione():
 
 @app.route('/registrazione', methods=['POST'])
 def registrazione():
-    name = request.form['name']
-    surname = request.form['surname']
+    username = request.form['username']
+    email = request.form['email']
     gym = request.form['gym']
     password = request.form['password']
 
@@ -49,8 +45,8 @@ def registrazione():
         registered_users[gym] = []
 
 
-    registered_users[gym].append({'name':name,
-                              'surname':surname,
+    registered_users[tipe].append({'username':username,
+                              'email':email,
                               'password':password})
 
     file_json = "registrazioni.json"
@@ -59,64 +55,64 @@ def registrazione():
     f.close()
 
 
-@app.route('/registrazione_palestra', methods=['POST'])
-def registrazione_palestra():
-    gym = request.form['palestra']
-    sorte = request.form['sorte']
-    capo = request.form['capo']
-    global registered_users
-    if sorte == 'aggiungeri':
-        registered_users[gym] = {'clienti':[],
-                                 'istruttori':[],
-                                 'capo':{'name':capo,
-                                         'password':capo + gym}}#e' inteso chiunque aggiunga i clienti
-        messaggio = f'la palestra {gym} e stata aggiunta con successo'
-    if sorte == 'rimuovi':
-        if gym not in registered_users:
-            messaggio = f'la palestra {gym} non esiste'
-        else:
-            registered_users.pop(gym)
-            messaggio = f'la palestra {gym} e stata eliminata'
-
-    with open(FILE_PATH, 'w') as file:
-        json.dump(registered_users, file)
-    return render_template('io.html',messaggio=messaggio)
-
-
-@app.route('/registrazione_utenti', methods=['POST'])
-def registrazione_utenti():
-    name = request.form['name']
-    surname = request.form['surname']
-    sorte = request.form['sorte']
-    gym = request.form['palestra']
-    global registered_users
-    if gym in registered_users:
-        for user in registered_users[gym]:
-            if sorte == 'istruttori':
-                user['istruttori'].append({'name':name,
-                             'surname':surname,
-                             'password':gym + 'istruttori'})
-            elif sorte == 'clienti':
-                registered_users[gym]['clienti'].append({'name':name,
-                             'surname':surname,
-                             'password':gym + 'clienti',
-                             'scheda':[]})
-            else:
-                for dizionario in user['istruttori']:
-                    if name in dizionario.values() and surname in dizionario.values():
-                        indice = user['istruttori'].index(dizionario)
-                        user['istruttori'].pop(indice)
-                    
-                #for dizionario in user['istruttori']:
-                #    if name in dizionario.values() and dato2 in dizionario.values():
-                #        return True
-
-
-
-    with open(FILE_PATH, 'w') as file:
-        json.dump(registered_users, file)
-
-    #return f'sorte = {sorte}'
-    return render_template('capo.html')
+#@app.route('/registrazione_palestra', methods=['POST'])
+#def registrazione_palestra():
+#    gym = request.form['palestra']
+#    sorte = request.form['sorte']
+#    capo = request.form['capo']
+#    global registered_users
+#    if sorte == 'aggiungeri':
+#        registered_users[gym] = {'clienti':[],
+#                                 'istruttori':[],
+#                                 'capo':{'name':capo,
+#                                         'password':capo + gym}}#e' inteso chiunque aggiunga i clienti
+#        messaggio = f'la palestra {gym} e stata aggiunta con successo'
+#    if sorte == 'rimuovi':
+#        if gym not in registered_users:
+#            messaggio = f'la palestra {gym} non esiste'
+#        else:
+#            registered_users.pop(gym)
+#            messaggio = f'la palestra {gym} e stata eliminata'
+#
+#    with open(FILE_PATH, 'w') as file:
+#        json.dump(registered_users, file)
+#    return render_template('io.html',messaggio=messaggio)
+#
+#
+#@app.route('/registrazione_utenti', methods=['POST'])
+#def registrazione_utenti():
+#    name = request.form['name']
+#    surname = request.form['surname']
+#    sorte = request.form['sorte']
+#    gym = request.form['palestra']
+#    global registered_users
+#    if gym in registered_users:
+#        for user in registered_users[gym]:
+#            if sorte == 'istruttori':
+#                user['istruttori'].append({'name':name,
+#                             'surname':surname,
+#                             'password':gym + 'istruttori'})
+#            elif sorte == 'clienti':
+#                registered_users[gym]['clienti'].append({'name':name,
+#                             'surname':surname,
+#                             'password':gym + 'clienti',
+#                             'scheda':[]})
+#            else:
+#                for dizionario in user['istruttori']:
+#                    if name in dizionario.values() and surname in dizionario.values():
+#                        indice = user['istruttori'].index(dizionario)
+#                        user['istruttori'].pop(indice)
+#                    
+#                #for dizionario in user['istruttori']:
+#                #    if name in dizionario.values() and dato2 in dizionario.values():
+#                #        return True
+#
+#
+#
+#    with open(FILE_PATH, 'w') as file:
+#        json.dump(registered_users, file)
+#
+#    #return f'sorte = {sorte}'
+#    return render_template('capo.html')
 if __name__ == '__main__':
     app.run(debug=True)
