@@ -29,6 +29,9 @@
         <input type="number" min="0" id="altezza" name="altezza" ><br><br>
         <button type="submit">Conferma registrazione</button>
     </form>
+    {% if messaggio %}
+    <p>{{ messaggio }}</p>
+    {% endif %}
     
 </body>
 </html>
