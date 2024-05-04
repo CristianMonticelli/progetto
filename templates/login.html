@@ -8,19 +8,27 @@
 </head>
 <body>
     <h1>Login</h1>
+    <h4>To log in, enter the data in the appropriate boxes</h4>
     <form action="/login" method="POST">
        
             <label for="username">username:</label>
-            <input type="text" id="username" name="name" required><br><br>
-        
+            <input type="text" id="username" name="username" required><br><br>
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required><br><br>
-            <label for="email">email:</label>
+            <label for="email">Email:</label>
             <input type="text" id="email" name="email" required><br><br>
+            <label for="tipo_account">Account type:</label>
+            <select id="tipo_account" name="tipo_account" required>
+                <option value="utente">user</option>
+                <option value="istruttore">instructor</option>
+            </select><br><br>
             <button type="submit">Log in</button>
             
         </form>
+        <h1>Registration</h1>
+    <h4>If you don't have an account, register here</h4>
         <form action="/pagina_di_registrazione" method="post">
+            
             <button type="submit">Registrati</button>
         </form>
 </body>

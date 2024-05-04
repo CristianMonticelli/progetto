@@ -9,13 +9,24 @@
     <h1>Sing in</h1>
     <form action="/registrazione" method="POST">
         <label for="username">username:</label>
-        <input type="text" id="username" name="name" required><br><br>
+        <input type="text" id="username" name="username" required><br><br>
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required><br><br>
-        <label for="email">email:</label>
+        <label for="email">Email:</label>
         <input type="text" id="email" name="email" required><br><br>
-        <label for="tipe">tipe:</label>
-        
+        <label for="tipo_account">Account type:</label>
+            <select id="tipo_account" name="tipo_account" required>
+                <option value="utente">user</option>
+                <option value="istruttore">instructor</option>
+            </select><br><br>
+        <h2>Optional</h2>
+        <h3>Useful in User accounts</h3>
+        <label for="peso">peso:</label>
+        <input type="number" min="0" id="peso" name="peso" ><br><br>
+        <label for="eta">eta:</label>
+        <input type="date" id="eta" name="eta" ><br><br>
+        <label for="altezza">altezza:</label>
+        <input type="number" min="0" id="altezza" name="altezza" ><br><br>
         <button type="submit">Conferma registrazione</button>
     </form>
     
