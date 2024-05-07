@@ -22,19 +22,28 @@
     <title>Istruttori</title>
 </head>
 <body>
+  <div class="indice">
+    <h4 style="color: white;" id="username" name="username" value="{{nome}}">Username:{{nome}}</h4>
     <form action="/utente" method="post">
         <button class="bottoni-indice" type="submit">torna in dietro</button>
       </form>
+  
+  </div>
+
+    <form action="/iscrizione" method="post"></form>
+    
       {% for chiave, dizionario in istruttori.items() %}
       <fieldset>
-        {{chiave}}
-        {{dizionario['stelle']}}
+
+        
+        <h5>stelle:{{dizionario['stelle']}}</h5>
         {% if dizionario['commenti'] %}
             {% for commento in dizionario['commenti'] %}
-                {{commento}}
+                {{commento}}<br>
+                
             {% endfor %}
         {% endif %}
-
+        <button class="bottoni-indice" name="iscrizione" id="iscrizione"  type="submit">iscriviti</button>
 
 
       </fieldset>

@@ -36,7 +36,7 @@
 <body>
     <div>
     
-    
+      <fieldset>
     <form action="/aggingi_allenamento" method="post">
       <button class="bottoni-indice" type="submit">allenament</button>
     </form>
@@ -44,6 +44,7 @@
     <form action="/aggiungi_esercizio" method="get">
         <button class="bottoni-indice" type="submit">add new esercice</button>
     </form>
+      </fieldset>
     {% for cliente in clienti %} 
     <form action="/" method="get">
       <button class="bottoni-indice" type="submit">{{cliente}}</button>

@@ -6,16 +6,19 @@ app = Flask(__name__)
 
 
 FILE_PATH = "registered_users.json" 
-
-with open(FILE_PATH, 'r') as file:
-    registered_users = json.load(file)
+registered_users = {}
+try:
+    with open(FILE_PATH, 'r') as file:
+        registered_users = json.load(file)
+except FileNotFoundError:
+    pass
 
 
 
 @app.route('/')
-def index():
-    #return render_template('login.html')
-    return render_template('utente.html')
+def indexS():
+    return render_template('login.html')
+    #return render_template('lo.html')
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -31,7 +34,8 @@ def login():
     if username in registered_users.get(tipo_account, {}):
         if password==registered_users[tipo_account][username]['password'] and email==registered_users[tipo_account][username]['email']:
             if tipo_account=='istruttore':
-                return render_template('primaria.html')
+                
+                return render_template('istruttore.html',nome=username,istruttore=registered_users[tipo_account][username],valutazione =3)
             else:
                 
                 return render_template('utente.html',immagine=random.randint(1, 3))
@@ -45,7 +49,8 @@ def pagina_di_registrazione():
 def registrazione():
     username = request.form['username']
     email = request.form['email']
-    password = request.form['password']
+    #password = request.form['password']
+    password = 'Alto'
     peso = request.form['peso']
     eta = request.form['email']
     altezza = request.form['password']
@@ -78,7 +83,8 @@ def registrazione():
                                             'email':email,
                                             'password':password,
                                             'stelle':0,
-                                            'commenti':[]
+                                            'commenti':[],
+                                            'iscritti':[]
                                         }
     
     file_json = "registered_users.json"
@@ -86,6 +92,15 @@ def registrazione():
         json.dump(registered_users, f)
     f.close()
     return render_template('login.html')
+@app.route('/iscrizione', methods=[ 'POST'])
+def iscrizione():
+    username = request.form['username']
+    iscrizione=request.form('iscrizione')
+    registered_users['istruttore'][iscrizione]['iscritti'].append({'username':username,
+                                                                   'email':registered_users['utente'][username]['email'],
+                                                                   'peso':registered_users['utente'][username]['peso'],
+                                                                    'eta':registered_users['utente'][username]["eta"],
+                                                                    'altezza':registered_users['utente'][username]})
 
 @app.route('/primaria', methods=['GET', 'POST'])
 def primaria():
@@ -155,9 +170,14 @@ def prefabbricato():
 @app.route('/scegli_istruttore')
 def scegli_istruttore():
     return render_template('istruttori.html',istruttori=registered_users['istruttore'])
+
 @app.route('/utente', methods=['POST'])
 def utente():
     return render_template('utente.html')
+
+@app.route('/istruttore', methods=['POST'])
+def istruttore():
+    return render_template('istruttore.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
