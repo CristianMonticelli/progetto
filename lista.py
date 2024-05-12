@@ -20,15 +20,16 @@ def indexS():
     return render_template('login.html')
     #return render_template('lo.html')
 
+    
 @app.route('/login', methods=['POST'])
 def login():
     username = request.form['username']
     email = request.form['email']
     password = request.form['password']
-    tipo_account = request.form['tipo_account']
-    global registered_users
     
-
+    global registered_users
+    if username== 'io' and password == 'w':
+        return render_template('io.html')
     
     
     if username in registered_users.get(tipo_account, {}):
@@ -38,7 +39,7 @@ def login():
                 return render_template('istruttore.html',nome=username,istruttore=registered_users[tipo_account][username],valutazione =3)
             else:
                 
-                return render_template('utente.html',immagine=random.randint(1, 3))
+                return render_template('iscrizione.html')
     return render_template('errorereg.html')
 
 @app.route('/pagina_di_registrazione', methods=['POST'])
@@ -71,15 +72,16 @@ def registrazione():
         return render_template('registrazione.html',messaggio=messaggio)
     if tipo_account=="utente":
         
-        registered_users[tipo_account][username]={
+        registered_users[username]={
                                             'email':email,
                                             'password':password,
                                             'peso':peso,
                                             'eta':eta,
-                                            'altezza':altezza
+                                            'altezza':altezza,
+                                            'iscrizione':False
                                         }
     else:
-        registered_users[tipo_account][username]={
+        registered_users[username]={
                                             'email':email,
                                             'password':password,
                                             'stelle':0,
@@ -179,5 +181,53 @@ def utente():
 def istruttore():
     return render_template('istruttore.html')
 
+@app.route('/registrazione_palestra', methods=['POST'])
+def registrazione_palestra():
+    gym = request.form['palestra']
+    sorte = request.form['sorte']
+    
+    global registered_users
+    if sorte == 'aggiungi':
+        registered_users[gym] = {'assegnati':[],
+                                 
+                                 'vaganti':[]}
+        messaggio = f'la palestra {gym} e stata aggiunta con successo'
+    if sorte == 'rimuovi':
+        if gym not in registered_users:
+            messaggio = f'la palestra {gym} non esiste'
+        else:
+            registered_users.pop(gym)
+            messaggio = f'la palestra {gym} e stata eliminata'
+
+    with open(FILE_PATH, 'w') as file:
+        json.dump(registered_users, file)
+    return render_template('io.html',messaggio=messaggio)
+
+
+@app.route('/registrazione_istruttore', methods=['POST'])
+def registrazione_utenti():
+    gym = request.form['palestra']
+    istruttore = request.form['istruttore']
+    sorte = request.form['sorte']
+    parola = request.form['parola']
+    if sorte == 'aggiungi':
+        registered_users[gym]['assegnati'].append({'nome':istruttore,
+                                                   'password':'qwerty'+gym+parolaw,
+                                      'clienti':[]})
+    
+                                
+        messaggio = f' istruttore {istruttore} e stato aggiunto con successo'
+    if sorte == 'rimuovi':
+        for i in registered_users[gym]['assegnati']:
+            if istruttore == i['nome']: 
+                registered_users.pop(i)
+                
+            else:
+               
+                messaggio = f'istruttore {istruttore} e stato eliminato'
+
+    with open(FILE_PATH, 'w') as file:
+        json.dump(registered_users, file)
+    return render_template('io.html',messaggio=messaggio)
 if __name__ == '__main__':
     app.run(debug=True)

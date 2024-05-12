@@ -17,17 +17,20 @@
             <input type="password" id="password" name="password" required><br><br>
             <label for="email">Email:</label>
             <input type="text" id="email" name="email" required><br><br>
-            <label for="tipo_account">Account type:</label>
-            <select id="tipo_account" name="tipo_account" required>
-                <option value="utente">user</option>
-                <option value="istruttore">instructor</option>
-            </select><br><br>
+            
             <button type="submit">Log in</button>
             
         </form>
         <h1>Registration</h1>
     <h4>If you don't have an account, register here</h4>
         <form action="/pagina_di_registrazione" method="post">
+            
+            <button type="submit">Registrati</button>
+        </form>
+        <h1>register as an instructor</h1>
+    <h4>If you don't have an account, register here as an instructor</h4>
+    <h6>Si avvisa che gli istruttori avranno una tassa per poter lavorare</h6>
+    <form action="/pagina_di_registrazione_istruttori" method="post">
             
             <button type="submit">Registrati</button>
         </form>

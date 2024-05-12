@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collegamento Carta di Credito o PayPal</title>
+    <style>
+        .card-form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .card-form label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        .card-form input[type="text"], 
+        .card-form input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .card-form button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="card-form">
+        <h2>Collega Carta di Credito o PayPal</h2>
+        <form action="/process_payment" method="post">
+            <label for="card_number">Numero della Carta di Credito:</label>
+            <input type="text" id="card_number" name="card_number" placeholder="1234 5678 9012 3456" required>
+            
+            <label for="expiry_date">Data di Scadenza:</label>
+            <input type="text" id="expiry_date" name="expiry_date" placeholder="MM/YY" required>
+            
+            <label for="cvv">CVV:</label>
+            <input type="password" id="cvv" name="cvv" placeholder="123" required>
+            
+            <button type="submit">Conferma Pagamento</button>
+        </form>
+        
+        <p>Oppure collega con PayPal:</p>
+        <form action="/process_paypal_payment" method="post">
+            <button type="submit">Collega con PayPal</button>
+        </form>
+    </div>
+</body>
+</html>
