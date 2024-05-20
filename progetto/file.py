@@ -3,7 +3,8 @@ import json
 import re
 app = Flask(__name__)
 FILE_PATH = "registered_users.json" 
-registered_users = {'utenti':[],
+registered_users = {'liberi':[],
+                    'utenti':[],
                     'istruttori':[]}
 try:
     with open(FILE_PATH, 'r') as file:
@@ -19,15 +20,16 @@ def index():
 def login():
     username = request.form['username']
     email = request.form['email']
-    password = request.form['password']
-    
+    #password = request.form['password']
+    password = "Alto"
     for user in registered_users['utenti']:
-        if user["username"]==username:
+        if user["username"]==username and user["password"]==password and user["email"]==email:
            return render_template('utente.html')
         
     for istruttori in registered_users['istruttori']:
-        if istruttori["username"]==username:
+        if istruttori["username"]==username and istruttori["password"]==password and istruttori["email"]==email:
             return render_template('istruttori.html')
+        
         
     return render_template('errorereg.html')
 
@@ -55,6 +57,9 @@ def registrazione():
     for istruttori in registered_users['istruttori']:
         if istruttori["username"]==username:
             messaggio+='Username already exists.' 
+    for utenti in registered_users['liberi']:
+        if utenti["username"]==username:
+            messaggio+='Username already exists.' 
 
     if re.search(r'\d{3,}', password):
         messaggio+="Don't put number sequences like 123 in your password."
@@ -70,8 +75,7 @@ def registrazione():
                                 'password':password,
                                 'peso':peso,
                                 'eta':eta,
-                                'altezza':altezza,
-                                'iscrizione':False})
+                                'altezza':altezza})
     
     
     file_json = "registered_users.json"
@@ -135,8 +139,18 @@ def registrazione_istruttori():
     f.close()
     return render_template('login.html')
 
+@app.route('/fare_schede', methods=['POST'])
+def fare_schede():
+    return render_template('schede.html')
 
+@app.route('/scegli_istruttore')
+def scegli_istruttore():
+    return render_template('iscrizione.html',istruttori=registered_users['istruttore'])   
 
-
+@app.route('/iscrizione/<username>', methods=[ 'POST'])
+def iscrizione(username:None):
+    username = request.form['username']
+    iscrizione=request.form('iscrizione')
+    registered_users['istruttore'][iscrizione]['iscritti'].append(username)
 if __name__ == '__main__':
     app.run(debug=True)

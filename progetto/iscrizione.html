@@ -24,21 +24,17 @@
 <body>
   
 
-    <form action="/iscrizione" method="post"></form>
     
-      {% for chiave, dizionario in istruttori.items() %}
+    
+      {% for dizionario in istruttori %}
       <fieldset>
 
         
-        <h5>stelle:{{dizionario['stelle']}}</h5>
-        {% if dizionario['commenti'] %}
-            {% for commento in dizionario['commenti'] %}
-                {{commento}}<br>
+        
+                {{dizionario}}<br>
                 
-            {% endfor %}
-        {% endif %}
-        <button class="bottoni-indice" name="iscrizione" id="iscrizione"  type="submit">iscriviti</button>
-
+        
+        <a href="/iscrizione/{{ dizionario.id }}">{{ recipe.name }}</a>
 
       </fieldset>
       {% endfor %}

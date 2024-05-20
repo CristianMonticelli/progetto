@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestione Utenti</title>
+</head>
+<body>
+    <h1>Gestione Utenti</h1>
+
+    <!-- Menu a tendina con tutti i nomi degli iscritti e bottone per navigare -->
+    <h2>Elenco Iscritti</h2>
+    <form action="/select_user" method="GET">
+        <select id="userSelect" name="username" onchange="if (this.value) { this.form.submit(); }">
+            <option value="">Seleziona un utente</option>
+            {% for user in users %}
+                <option value="{{ user['username'] }}">{{ user['username'] }}</option>
+            {% endfor %}
+        </select>
+    </form>
+
+    <!-- Sezione per aggiungere nuovi utenti -->
+    <h2>Aggiungi Utente</h2>
+    <form action="/add_user" method="POST">
+        <label for="username">Nome Utente:</label>
+        <input type="text" id="username" name="username" required><br>
+        <label for="eta">Età:</label>
+        <input type="number" id="eta" name="eta" required><br>
+        <label for="peso">Peso (kg):</label>
+        <input type="number" id="peso" name="peso" required><br>
+        <label for="altezza">Altezza (cm):</label>
+        <input type="number" id="altezza" name="altezza" required><br>
+        
+        <!-- Menu a tendina per selezionare l'istruttore -->
+        <label for="istruttore">Istruttore:</label>
+        <select id="istruttore" name="istruttore" required>
+            {% for istruttore in istruttori %}
+                <option value="{{ istruttore['username'] }}">{{ istruttore['username'] }}</option>
+            {% endfor %}
+        </select><br>
+        
+        <button type="submit">Aggiungi</button>
+    </form>
+</body>
+</html>

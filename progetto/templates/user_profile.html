@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dettagli Esercizio</title>
+    <!-- Aggiungi link al foglio di stile Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .main-table {
+            width: 70%;
+            float: left;
+        }
+        .exercise-table {
+            width: 25%;
+            margin-left: 5%;
+            float: right;
+        }
+        .exercise-image {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+        }
+        .exercise-table-small img {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dettagli Esercizio per {{ selected_user['username'] }}</h1>
+
+        <!-- Tabella principale per gli esercizi selezionati -->
+        <div class="main-table">
+            <h2>Esercizi Selezionati</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Immagine</th>
+                        <th scope="col">Esercizio</th>
+                        <th scope="col">Ripetizioni</th>
+                        <th scope="col">Serie</th>
+                        <th scope="col">Azione</th>
+                    </tr>
+                </thead>
+                <tbody id="selected-exercises-body">
+                    {% if selected_exercises %}
+                        {% for exercise in selected_exercises %}
+                            <tr>
+                                <td><img src="{{ url_for('static', filename='images/' ~ exercise['immagine']) }}" alt="{{ exercise['esercizio'] }}" class="exercise-image"></td>
+                                <td>{{ exercise['esercizio'] }}</td>
+                                <td>{{ exercise['ripetizioni'] }}</td>
+                                <td>{{ exercise['serie'] }}</td>
+                                <td>
+                                    <form action="/remove_exercise/{{ selected_user['username'] }}" method="POST" style="display: inline;">
+                                        <input type="hidden" name="exercise" value="{{ exercise['esercizio'] }}">
+                                        <button type="submit" class="btn btn-danger btn-sm">Rimuovi</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="5">Nessun esercizio selezionato</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Tabelle più piccole per ogni esercizio -->
+        <div class="exercise-table">
+            <h2>Altri Esercizi</h2>
+            <div class="row">
+                {% for exercise in esercizii %}
+                    <div class="col-md-12 mb-2">
+                        <form action="/add_exercise/{{ selected_user['username'] }}" method="POST">
+                            <input type="hidden" name="selected_exercise" value="{{ exercise['esercizio'] }}">
+                            <table class="table table-bordered exercise-table-small">
+                                <tbody>
+                                    <tr>
+                                        <td rowspan="3">
+                                            <img src="{{ url_for('static', filename='images/' ~ exercise['immagine']) }}" alt="{{ exercise['esercizio'] }}" class="exercise-image">
+                                        </td>
+                                        <td>Esercizio</td>
+                                        <td>{{ exercise['esercizio'] }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ripetizioni</td>
+                                        <td>{{ exercise['ripetizioni'] }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Serie</td>
+                                        <td>{{ exercise['serie'] }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button type="submit" class="btn btn-primary btn-sm">Aggiungi</button>
+                        </form>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

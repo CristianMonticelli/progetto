@@ -1,38 +1,32 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <style>
+        .password-container {
+            display: flex;
+            align-items: center;
+        }
+        .password-container input {
+            flex-grow: 1;
+            
+        }
+    </style>
 </head>
 <body>
     <h1>Login</h1>
-    <h4>To log in, enter the data in the appropriate boxes</h4>
-    <form action="/login" method="POST">
-       
-            <label for="username">username:</label>
-            <input type="text" id="username" name="username" required><br><br>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required><br><br>
-            <label for="email">Email:</label>
-            <input type="text" id="email" name="email" required><br><br>
-            
-            <button type="submit">Log in</button>
-            
-        </form>
-        <h1>Registration</h1>
-    <h4>If you don't have an account, register here</h4>
-        <form action="/pagina_di_registrazione" method="post">
-            
-            <button type="submit">Registrati</button>
-        </form>
-        <h1>register as an instructor</h1>
-    <h4>If you don't have an account, register here as an instructor</h4>
-    <h6>Si avvisa che gli istruttori avranno una tassa per poter lavorare</h6>
-    <form action="/pagina_di_registrazione_istruttori" method="post">
-            
-            <button type="submit">Registrati</button>
-        </form>
+    <form action="/login" method="post">
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username" required><br>
+        <label for="password">Password:</label><br>
+        <div class="password-container">
+            <input type="password" id="password" name="password" required>
+        </div>
+        <button type="button" onclick="document.getElementById('password').type = document.getElementById('password').type === 'password' ? 'text' : 'password';">Mostra password</button>
+        <br>
+        <button type="submit">Login</button>
+    </form>
 </body>
 </html>

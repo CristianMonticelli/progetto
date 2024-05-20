@@ -94,6 +94,7 @@ def registrazione():
         json.dump(registered_users, f)
     f.close()
     return render_template('login.html')
+
 @app.route('/iscrizione', methods=[ 'POST'])
 def iscrizione():
     username = request.form['username']
