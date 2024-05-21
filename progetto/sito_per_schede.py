@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-
+import random
 app = Flask(__name__)
 
 users = [
@@ -54,7 +54,7 @@ users = [
 ]
 
 istruttori = [
-    {"username": "Alice", "password": "password1", "eta": 25, "titolo studio": "Laurea in Economia", "utenti": [
+    {"username": "A", "password": "p", "eta": 25, "titolo studio": "Laurea in Economia", "utenti": [
         {"username": "Bob"},
         {"username": "Charlie"}
     ]},
@@ -70,7 +70,7 @@ istruttori = [
 
 
 
-# Lista di esempio di esercizi come dizionari
+# Lista di esercizi come dizionari
 esercizii = [
     {"esercizio": "Push-up", "ripetizioni": 20, "serie": 3, "immagine": "pushup.jpg"},
     {"esercizio": "Sit-up", "ripetizioni": 30, "serie": 3, "immagine": "situp.jpg"},
@@ -87,6 +87,11 @@ user_exercises = {user["username"]: [] for user in users}
 def indexS():
     return render_template('login.html')
 
+@app.route('/image-test')
+def image_test():
+    image_path = url_for('static', filename='squat.jpg')
+    return f'<img src="{image_path}" alt="Girl in a jacket" width="500" height="600">'
+
 @app.route('/login', methods=['POST'])
 def login():
     username = request.form['username']
@@ -99,7 +104,7 @@ def login():
             iscritti = istruttore['utenti']
             return render_template('home.html', users=iscritti, username=username)
 
-    # Controlla se l'utente è un utente normale
+    # Controlla l'utente 
     for user in users:
         if user['username'] == username and user['password'] == password:
             return redirect(url_for('ute'))
@@ -127,8 +132,10 @@ def select_user():
 @app.route('/user/<username>', methods=['GET', 'POST'])
 def user_profile(username):
     user = next((user for user in users if user["username"] == username), None)
+    
     if user:
         user_selected_exercises = user_exercises[username]
+        
         return render_template('user_profile.html', selected_user=user, esercizii=esercizii, selected_exercises=user_selected_exercises)
     else:
         return "Utente non trovato", 404
@@ -137,10 +144,13 @@ def user_profile(username):
 def add_exercise(username):
     selected_exercise_name = request.form['selected_exercise']
     selected_exercise = next((exercise for exercise in esercizii if exercise["esercizio"] == selected_exercise_name), None)
+    
     if selected_exercise:
         user = next((user for user in users if user["username"] == username), None)
+        
         if user:
             user['schede'].append(selected_exercise)
+            
     return redirect(url_for('user_profile', username=username))
 
 @app.route('/remove_exercise/<username>', methods=['POST'])
@@ -175,5 +185,6 @@ def add_user():
         return "Istruttore non trovato"
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    random_port = random.randint(1024, 49151)
+    app.run(debug=True, port=random_port)
