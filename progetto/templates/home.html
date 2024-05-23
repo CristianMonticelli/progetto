@@ -2,12 +2,91 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestione Utenti</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffcc00d0; 
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff; /* Grigio chiaro */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #333;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #000000;
+        }
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="#999" viewBox="0 0 24 24" width="16" height="16"><path d="M7 10l5 5 5-5z"></path></svg>');
+            background-repeat: no-repeat;
+            background-position-x: calc(100% - 15px);
+            background-position-y: center;
+        }
+        button[type="submit"] {
+            background-color: #ffcc00; /* Giallo */
+            color: #000000;
+            padding: 10px 20px;
+            border: 2px solid #ffcc00; /* Giallo */
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+            width: 100%;
+        }
+        button[type="submit"]:hover {
+            background-color: #ffdb4d; /* Giallo più chiaro */
+            border-color: #ffdb4d; /* Giallo più chiaro */
+        }
+        .welcome {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333; /* Nero */
+        }
+        .section {
+            background-color: #9d9d9d; /* Grigio scuro */
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
 <body>
-    <h1>Gestione Utenti</h1>
+    <div class="container">
+        <!-- Intestazione di Benvenuto -->
+        <div class="welcome">
+            <h2>Benvenuto, {{ username }}!</h2>
+            <p>Qui puoi gestire gli utenti e aggiungerne di nuovi.</p>
+        </div>
 
-    <!-- Menu a tendina con tutti i nomi degli iscritti e bottone per navigare -->
+        <!-- Sezione per Elenco Iscritti -->
+        <!-- Rimuovi completamente la sezione relativa agli istruttori -->
+
+<div class="section">
     <h2>Elenco Iscritti</h2>
     <form action="/select_user" method="GET">
         <select id="userSelect" name="username" onchange="if (this.value) { this.form.submit(); }">
@@ -17,28 +96,25 @@
             {% endfor %}
         </select>
     </form>
+</div>
 
-    <!-- Sezione per aggiungere nuovi utenti -->
-    <h2>Aggiungi Utente</h2>
-    <form action="/add_user" method="POST">
-        <label for="username">Nome Utente:</label>
-        <input type="text" id="username" name="username" required><br>
-        <label for="eta">Età:</label>
-        <input type="number" id="eta" name="eta" required><br>
-        <label for="peso">Peso (kg):</label>
-        <input type="number" id="peso" name="peso" required><br>
-        <label for="altezza">Altezza (cm):</label>
-        <input type="number" id="altezza" name="altezza" required><br>
-        
-        <!-- Menu a tendina per selezionare l'istruttore -->
-        <label for="istruttore">Istruttore:</label>
-        <select id="istruttore" name="istruttore" required>
-            {% for istruttore in istruttori %}
-                <option value="{{ istruttore['username'] }}">{{ istruttore['username'] }}</option>
-            {% endfor %}
-        </select><br>
-        
-        <button type="submit">Aggiungi</button>
-    </form>
+
+        <!-- Sezione per aggiungere nuovi utenti -->
+        <div class="section">
+            <h2>Aggiungi Utente</h2>
+            <form action="/add_user" method="POST">
+                <label for="username">Nome Utente:</label>
+                <input type="text" id="username" name="username" required><br>
+                <label for="email">Email:</label>
+<input type="text" id="email" name="email" required><br>
+                    {% for istruttore in istruttori %}
+                        <option value="{{ istruttore['username'] }}">{{ istruttore['username'] }}</option>
+                    {% endfor %}
+                </select><br>
+                
+                <button type="submit">Aggiungi</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
