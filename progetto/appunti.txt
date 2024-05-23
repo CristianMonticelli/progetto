@@ -1,0 +1,8 @@
+https://it.air-up.com/pages/not-your-regular-water-bottle-1?bottle=bottle-tritan-650ml-hot-pink&step=start
+https://www.namedsport.com/it/
+https://www.yamamotonutrition.com/it_it
+https://www.technogym.com/it-IT/?sfcampid=485752&&pdg=kwd-325320125:cmp-16173677206:adg-132670678025:crv-699449126295:pos-:dev-c&gad_source=1&gclid=Cj0KCQjw0ruyBhDuARIsANSZ3wo8zJRh9l4K4T7xVW33qfW14PsG9Q3dZ3s3WonVe0tsHDr33RI1VKAaAu80EALw_wcB&gclsrc=aw.ds
+https://www.motionlab.it/benvenuti_a_motion_lab/Palestra.html
+
+<img src="{{left}}" alt="Immagine Sinistra">
+        <img src="{{right}}" alt="Immagine Destra">
