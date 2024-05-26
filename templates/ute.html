@@ -29,10 +29,12 @@
         .compact-table {
             font-size: 0.9rem;
             width: 100%;
+            border-collapse: collapse;
         }
         .compact-table th, .compact-table td {
             padding: 10px;
             text-align: left;
+            border: 1px solid #ccc;
         }
         .exercise-image {
             width: 100px;
@@ -55,17 +57,15 @@
             color: black;
         }
         @media (max-width: 768px) {
-    .container {
-        width: 90%;
-    }
-}
-
-/* Media query per adattare la larghezza del div su dispositivi più piccoli */
-@media (max-width: 480px) {
-    .container {
-        width: 100%; 
-    }
-}
+            .container {
+                width: 90%;
+            }
+        }
+        @media (max-width: 480px) {
+            .container {
+                width: 100%; 
+            }
+        }
     </style>
 </head>
 <body>
@@ -76,7 +76,6 @@
     <div class="container">
         <h1>La tua Scheda per {{ selected_user['username'] }}</h1>
 
-        <!-- Tabella principale per gli esercizi selezionati -->
         <div class="scrollable-table mt-4">
             <h2>Esercizi Selezionati</h2>
             <table class="table table-striped compact-table">
@@ -88,6 +87,7 @@
                         <th scope="col">Serie</th>
                         <th scope="col">Pausa</th>
                         <th scope="col">Kg</th>
+                        <th scope="col">Azione</th>
                     </tr>
                 </thead>
                 <tbody id="selected-exercises-body">
@@ -95,7 +95,7 @@
                         {% for exercise in selected_exercises %}
                             {% if exercise['esercizio'] == "Workout Divider" %}
                                 <tr>
-                                    <td colspan="4" class="divider-title">{{ exercise['workout_name'] }}</td>
+                                    <td colspan="7" class="divider-title">{{ exercise['workout_name'] }}</td>
                                 </tr>
                             {% else %}
                                 <tr>
@@ -108,13 +108,19 @@
                                     <td>{{ exercise['ripetizioni'] }}</td>
                                     <td>{{ exercise['serie'] }}</td>
                                     <td>{{ exercise['pausa'] }}</td>
-                                    <td>{{ exercise['kg']}}</td>
+                                    <td>{{ exercise['kg'] }}</td>
+                                    <td>
+                                        <form action="/remove_exercise/{{ selected_user['username'] }}" method="POST" style="display: inline;">
+                                            <input type="hidden" name="exercise" value="{{ exercise['esercizio'] }}">
+                                            <button type="submit" class="btn">Rimuovi</button>
+                                        </form>
+                                    </td>
                                 </tr>
                             {% endif %}
                         {% endfor %}
                     {% else %}
                         <tr>
-                            <td colspan="6">Nessun esercizio selezionato</td>
+                            <td colspan="7">Nessun esercizio selezionato</td>
                         </tr>
                     {% endif %}
                 </tbody>

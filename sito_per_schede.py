@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 import json
 import re
+import random
 import matplotlib.pyplot as plt
 from datetime import datetime
 
@@ -10,7 +11,14 @@ app = Flask(__name__)
 USER_FILE_PATH = "users.json"
 ISTRUTTORI_FILE_PATH = "istruttori.json"
 ESERCIZI_FILE_PATH = "esercizii.json"
+PUBBLICITA_FILE_PATH = "publicita.json"
 
+pubblicita= []
+try:
+    with open(PUBBLICITA_FILE_PATH, 'r') as file:
+        pubblicita = json.load(file)
+except FileNotFoundError:
+    pass
 # Load data
 users = []
 try:
@@ -43,8 +51,15 @@ def save_data(file_path, data):
 
 @app.route('/')
 def indexS():
-    """Render the login page."""
-    return render_template('login.html')
+    """Render the login page with randomly selected images."""
+    
+    immagine1 = random.choice(pubblicita)
+    immagine2 = random.choice(pubblicita)
+    
+    while immagine1 == immagine2:
+        immagine2 = random.choice(pubblicita)
+    
+    return render_template('login.html', left_image=immagine1, right_image=immagine2)
 
 @app.route('/image-test')
 def image_test():

@@ -2,6 +2,4 @@ flask
 json
 re
 matplotlib
-io
-base64
 datetime
