@@ -7,7 +7,6 @@ from datetime import datetime
 
 app = Flask(__name__)
 
-# Paths to JSON files
 USER_FILE_PATH = "users.json"
 ISTRUTTORI_FILE_PATH = "istruttori.json"
 ESERCIZI_FILE_PATH = "esercizii.json"
@@ -19,7 +18,7 @@ try:
         pubblicita = json.load(file)
 except FileNotFoundError:
     pass
-# Load data
+
 users = []
 try:
     with open(USER_FILE_PATH, 'r') as file:
@@ -41,7 +40,6 @@ try:
 except FileNotFoundError:
     pass
 
-# Dictionary to store users' daily weights
 user_peso = {user["username"]: user.get("peso", []) for user in users}
 
 def save_data(file_path, data):
@@ -73,13 +71,11 @@ def login():
     username = request.form['username']
     password = request.form['password']
 
-    # Check if the user is an instructor
     for istruttore in istruttori:
         if istruttore['username'] == username and istruttore['password'] == password:
             iscritti = istruttore.get('utenti', [])
             return render_template('home.html', users=iscritti, username=username)
 
-    # Check if the user is a regular user
     for user in users:
         if user['username'] == username and user['password'] == password:
             return redirect(url_for('ute', username=username))
@@ -124,7 +120,6 @@ def add_peso():
             "peso": float(peso)
         }]
 
-    # Update the user peso in the users list and save to file
     for user in users:
         if user["username"] == username:
             user["peso"] = user_peso[username]
@@ -149,8 +144,6 @@ def statistiche(username):
         plt.ylabel('Peso (kg)')
         plt.title('Andamento del Peso nel Tempo')
         plt.xticks(rotation=45)
-
-        # Save the plot as a static file
         plot_filename = f'static/{username}_weight_plot.png'
         plt.savefig(plot_filename)
         plot_url = url_for('static', filename=f'{username}_weight_plot.png')
@@ -296,12 +289,11 @@ def add_user(username):
         "email": request.form['email'],
     }
     
-    # Trova l'istruttore che sta aggiungendo l'utente
     
     istruttore = next((istruttore for istruttore in istruttori if istruttore["username"] == username), None)
     print(1)
     if istruttore:
-        # Aggiungi l'utente alla lista degli utenti dell'istruttore
+       
         istruttore['utenti'].append(new_user)
         
         
@@ -390,4 +382,5 @@ def edit_workout_divider(username):
     return redirect(url_for('user_profile', username=username))
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    random_port = random.randint(1024, 49151)
+    app.run(debug=True, port=random_port)
