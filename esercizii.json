@@ -1,0 +1,37 @@
+{
+    "cardio": [
+        {"esercizio": "Jumping Jacks", "immagine": "jumping_jacks.jpg"},
+        {"esercizio": "Burpees", "immagine": "burpees.jpg"},
+        {"esercizio": "High Knees", "immagine": "high_knees.jpg"}
+    ],
+    "spalle": [
+        {"esercizio": "Shoulder Press", "immagine": "shoulder_press.jpg"},
+        {"esercizio": "Lateral Raise", "immagine": "lateral_raise.jpg"},
+        {"esercizio": "Front Raise", "immagine": "front_raise.jpg"}
+    ],
+    "polpacci": [
+        {"esercizio": "Calf Raise", "immagine": "calf_raise.jpg"},
+        {"esercizio": "Seated Calf Raise", "immagine": "seated_calf_raise.jpg"},
+        {"esercizio": "Jump Rope", "immagine": "jump_rope.jpg"}
+    ],
+    "glutei": [
+        {"esercizio": "Glute Bridge", "immagine": "glute_bridge.jpg"},
+        {"esercizio": "Donkey Kicks", "immagine": "donkey_kicks.jpg"},
+        {"esercizio": "Hip Thrusts", "immagine": "hip_thrusts.jpg"}
+    ],
+    "coscia": [
+        {"esercizio": "Squat", "immagine": "squat.jpg"},
+        {"esercizio": "Lunges", "immagine": "lunges.jpg"},
+        {"esercizio": "Leg Press", "immagine": "leg_press.jpg"}
+    ],
+    "schiena": [
+        {"esercizio": "Pull-up", "immagine": "pullup.jpg"},
+        {"esercizio": "Deadlift", "immagine": "deadlift.jpg"},
+        {"esercizio": "Bent Over Row", "immagine": "bent_over_row.jpg"}
+    ],
+    "petto": [
+        {"esercizio": "Push-up", "immagine": "pushup.jpg"},
+        {"esercizio": "Bench Press", "immagine": "bench_press.jpg"},
+        {"esercizio": "Chest Fly", "immagine": "chest_fly.jpg"}
+    ]
+}

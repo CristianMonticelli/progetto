@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dettagli Esercizio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffcc00d0; 
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #333;
+            text-align: center;
+        }
+        .btn-group .btn {
+            background-color: #ffcc00;
+            border: 2px solid #ffcc00;
+            color: #000;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+            padding: 10px;
+            margin: 5px;
+        }
+        .btn-group .btn:hover {
+            background-color: #ffdb4d;
+            border-color: #ffdb4d;
+        }
+        .card {
+            display: flex;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .card img {
+            width: 100px;
+            height: auto;
+            border-right: 1px solid #ccc;
+        }
+        .card-body {
+            flex: 1;
+            padding: 10px;
+        }
+        .scrollable-table {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+        .compact-table {
+            font-size: 0.9rem;
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .compact-table th, .compact-table td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ccc;
+        }
+        .divider-title {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            background-color: #ffcc00;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        fieldset {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        legend {
+            font-weight: bold;
+        }
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+            }
+            .card {
+                flex-direction: column;
+            }
+            .card img {
+                width: 100%;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid #ccc;
+            }
+        }
+        @media (max-width: 480px) {
+            .container {
+                width: 100%; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dettagli Esercizio per {{ selected_user['username'] }}</h1>
+
+        <fieldset>
+            <legend>Aggiungi Divisore Allenamento</legend>
+            <form action="/add_workout_divider/{{ selected_user['username'] }}" method="POST">
+                <label for="workout_name">Nome Divisore Allenamento:</label>
+                <input type="text" name="workout_name" id="workout_name" required>
+                <button type="submit" class="btn">Aggiungi Divisore Allenamento</button>
+            </form>
+        </fieldset>
+
+        <fieldset>
+            <legend>Seleziona Categoria Esercizi</legend>
+            <div class="btn-group" role="group" aria-label="Categorie esercizi">
+                {% for category in esercizii.keys() %}
+                    <a href="{{ url_for('user_profile', username=selected_user['username'], category=category) }}" class="btn">{{ category.capitalize() }}</a>
+                {% endfor %}
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Esercizi</legend>
+            <div class="row">
+                {% if current_category %}
+                    {% for exercise in current_category %}
+                        <div class="card">
+                            <img src="{{ url_for('static', filename='images/' ~ exercise['immagine']) }}" alt="{{ exercise['esercizio'] }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ exercise['esercizio'] }}</h5>
+                                <form action="/add_exercise/{{ selected_user['username'] }}" method="POST">
+                                    <input type="hidden" name="selected_exercise" value="{{ exercise['esercizio'] }}">
+                                    <label for="ripetizioni_{{ exercise['esercizio'] }}">Ripetizioni:</label>
+                                    <input type="number" name="ripetizioni" id="ripetizioni_{{ exercise['esercizio'] }}" required><br>
+                                    <label for="serie_{{ exercise['esercizio'] }}">Serie:</label>
+                                    <input type="number" name="serie" id="serie_{{ exercise['esercizio'] }}" required><br>
+                                    <label for="pausa_{{ exercise['esercizio'] }}">Pausa (in secondi):</label>
+                                    <input type="number" name="pausa" id="pausa_{{ exercise['esercizio'] }}" required><br>
+                                    <label for="kg_{{ exercise['esercizio'] }}">peso (in Kg):</label>
+                                    <input type="number" name="kg" id="kg_{{ exercise['esercizio'] }}" required><br>
+                                    <button type="submit" class="btn">Aggiungi</button>
+                                </form>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>Seleziona una categoria per visualizzare gli esercizi</p>
+                {% endif %}
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Esercizi Selezionati</legend>
+            <div class="scrollable-table">
+                <table class="compact-table">
+                    <thead>
+                        <tr>
+                            <th>Immagine</th>
+                            <th>Esercizio</th>
+                            <th>Ripetizioni</th>
+                            <th>Serie</th>
+                            <th>Pausa</th>
+                            <th>kg</th>
+                            <th>Azione</th>
+                        </tr>
+                    </thead>
+                    <tbody id="selected-exercises-body">
+                        {% if selected_exercises %}
+                            {% for exercise in selected_exercises %}
+                                {% if exercise['esercizio'] == "Workout Divider" %}
+                                    <tr>
+                                        <td colspan="7" class="divider-title">{{ exercise['workout_name'] }}</td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td>
+                                            {% if exercise['immagine'] %}
+                                                <img src="{{ url_for('static', filename='images/' ~ exercise['immagine']) }}" alt="{{ exercise['esercizio'] }}" style="width: 50px; height: auto;">
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ exercise['esercizio'] }}</td>
+                                        <td>{{ exercise['ripetizioni'] }}</td>
+                                        <td>{{ exercise['serie'] }}</td>
+                                        <td>{{ exercise['pausa'] }}</td>
+                                        <td>{{ exercise['kg'] }}</td>
+                                        <td>
+                                            <form action="/remove_exercise/{{ selected_user['username'] }}" method="POST" style="display: inline;">
+                                                <input type="hidden" name="exercise" value="{{ exercise['esercizio'] }}">
+                                                <button type="submit" class="btn">Rimuovi</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="7">Nessun esercizio selezionato</td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </fieldset>
+    </div>
+</body>
+</html>

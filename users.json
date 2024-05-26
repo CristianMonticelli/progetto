@@ -1,0 +1,140 @@
+[
+    {
+        "username": "B",
+        "eta": 30,
+        "peso": [
+            {
+                "date": "2023-01-01",
+                "peso": 75
+            },
+            {
+                "date": "2024-05-26",
+                "peso": 100.0
+            }
+        ],
+        "altezza": 175,
+        "password": "p",
+        "schede": [
+            {
+                "esercizio": "Workout Divider",
+                "ripetizioni": "",
+                "serie": "",
+                "pausa": "",
+                "immagine": "",
+                "workout_name": "Allenamento 1"
+            },
+            {
+                "esercizio": "Jumping Jacks",
+                "ripetizioni": "10",
+                "serie": "3",
+                "pausa": "60",
+                "kg": "100",
+                "immagine": "jumping_jacks.jpg"
+            }
+        ]
+    },
+    {
+        "username": "Charlie",
+        "eta": 35,
+        "peso": [
+            {
+                "date": "2023-01-01",
+                "peso": 85
+            }
+        ],
+        "altezza": 180,
+        "password": "password3",
+        "schede": [
+            {
+                "esercizio": "Squat",
+                "ripetizioni": "1",
+                "serie": "1",
+                "pausa": "1",
+                "kg": "1",
+                "immagine": "squat.jpg"
+            }
+        ]
+    },
+    {
+        "username": "Emma",
+        "eta": 28,
+        "peso": [
+            {
+                "date": "2023-01-01",
+                "peso": 65
+            }
+        ],
+        "altezza": 160,
+        "password": "password5",
+        "schede": []
+    },
+    {
+        "username": "Frank",
+        "eta": 32,
+        "peso": [
+            {
+                "date": "2023-01-01",
+                "peso": 80
+            }
+        ],
+        "altezza": 185,
+        "password": "password6",
+        "schede": []
+    },
+    {
+        "username": "Hannah",
+        "eta": 29,
+        "peso": [
+            {
+                "date": "2023-01-01",
+                "peso": 68
+            }
+        ],
+        "altezza": 175,
+        "password": "password8",
+        "schede": []
+    },
+    {
+        "username": "Isaac",
+        "eta": 33,
+        "peso": [
+            {
+                "date": "2023-01-01",
+                "peso": 90
+            }
+        ],
+        "altezza": 180,
+        "password": "password9",
+        "schede": []
+    },
+    {
+        "username": "Gorgon zola",
+        "password": "Stagionato",
+        "email": "io.sono@gmail.com",
+        "peso": [
+            {
+                "date": "2024-05-25",
+                "peso": 40.0
+            }
+        ],
+        "eta": "8",
+        "altezza": "121"
+    },
+    {
+        "username": "Monticelli",
+        "password": "C",
+        "email": "io.sono@gmail.com",
+        "peso": [
+            {
+                "date": "2024-05-26",
+                "peso": 30.0
+            },
+            {
+                "date": "2024-05-26",
+                "peso": 40.0
+            }
+        ],
+        "eta": "8",
+        "altezza": "121"
+    }
+]

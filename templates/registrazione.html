@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrati</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffcc00d0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        h1, h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #000;
+        }
+        input[type="text"], input[type="password"], input[type="email"], input[type="number"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: calc(100% - 22px);
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+            }
+        }
+        @media (max-width: 480px) {
+            .container {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Registrati</h1>
+        <form action="/registrazione" method="post">
+            <fieldset>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required><br><br>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required><br><br>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required><br><br>
+                <label for="termini"><a href="/term">Termini e Condizioni</a>:</label>
+                <input type="checkbox" id="termini" name="termini" required><br><br>
+            </fieldset>
+            <h2>Optional</h2>
+            <fieldset>
+                <label for="altezza">Altezza:</label>
+                <input type="number" min="99" max="221" id="altezza" name="altezza"><br><br>
+                <label for="eta">Età:</label>
+                <input type="number" min="8" id="eta" name="eta"><br><br>
+                <label for="peso">Peso:</label>
+                <input type="number" min="40" max="330" id="peso" name="peso"><br><br>
+                <button type="submit">Conferma registrazione</button>
+            </fieldset>
+        </form>
+        {% if messaggio %}
+        <p style="color: red;">!{{ messaggio }}</p>
+        {% endif %}
+        
+        
+    </div>
+</body>
+</html>

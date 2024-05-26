@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistiche Peso</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffcc00d0;
+        }
+        .container {
+            max-width: 900px; 
+            margin: 40px auto; 
+            padding: 30px; 
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #333;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .btn {
+            background-color: #ffcc00;
+            border: 2px solid #ffcc00;
+            color: #000;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+            padding: 10px 20px;
+            text-align: center;
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .btn:hover {
+            background-color: #ffdb4d;
+            border-color: #ffdb4d;
+        }
+        .chart-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .chart-container img {
+            max-width: 80%; 
+            height: auto; 
+        }
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Statistiche Peso per {{ username }}</h1>
+        <form action="{{ url_for('add_peso') }}" method="POST">
+            <div class="form-group">
+                <label for="peso">Peso (kg):</label>
+                <input type="number" step="0.1" name="peso" id="peso" required>
+            </div>
+            <input type="hidden" name="username" value="{{ username }}">
+            <button type="submit" class="btn">Aggiungi Peso</button>
+        </form>
+
+        <div class="chart-container">
+            {% if plot_url %}
+                <img src="{{ plot_url }}" alt="Grafico Peso">
+            {% else %}
+                <p>Nessun dato disponibile.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

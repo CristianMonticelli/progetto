@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La tua Scheda</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffcc00d0; 
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #333;
+            text-align: center;
+        }
+        .scrollable-table {
+            overflow-x: auto;
+        }
+        .compact-table {
+            font-size: 0.9rem;
+            width: 100%;
+        }
+        .compact-table th, .compact-table td {
+            padding: 10px;
+            text-align: left;
+        }
+        .exercise-image {
+            width: 100px;
+            height: auto;
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        @media (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+}
+
+/* Media query per adattare la larghezza del div su dispositivi più piccoli */
+@media (max-width: 480px) {
+    .container {
+        width: 100%; 
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="/">Home</a>
+        <a href="/statistiche/{{ selected_user['username'] }}">Statistiche</a>
+    </div>
+    <div class="container">
+        <h1>La tua Scheda per {{ selected_user['username'] }}</h1>
+
+        <!-- Tabella principale per gli esercizi selezionati -->
+        <div class="scrollable-table mt-4">
+            <h2>Esercizi Selezionati</h2>
+            <table class="table table-striped compact-table">
+                <thead>
+                    <tr>
+                        <th scope="col">Immagine</th>
+                        <th scope="col">Esercizio</th>
+                        <th scope="col">Ripetizioni</th>
+                        <th scope="col">Serie</th>
+                        <th scope="col">Pausa</th>
+                        <th scope="col">Kg</th>
+                    </tr>
+                </thead>
+                <tbody id="selected-exercises-body">
+                    {% if selected_exercises %}
+                        {% for exercise in selected_exercises %}
+                            {% if exercise['esercizio'] == "Workout Divider" %}
+                                <tr>
+                                    <td colspan="4" class="divider-title">{{ exercise['workout_name'] }}</td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td>
+                                        {% if exercise['immagine'] %}
+                                            <img src="{{ url_for('static', filename='images/' ~ exercise['immagine']) }}" alt="{{ exercise['esercizio'] }}" class="exercise-image">
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ exercise['esercizio'] }}</td>
+                                    <td>{{ exercise['ripetizioni'] }}</td>
+                                    <td>{{ exercise['serie'] }}</td>
+                                    <td>{{ exercise['pausa'] }}</td>
+                                    <td>{{ exercise['kg']}}</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="6">Nessun esercizio selezionato</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+[
+    {
+        "username": "A",
+        "password": "p",
+        "eta": 25,
+        "titolo studio": "Laurea in Economia",
+        "utenti": [
+            {
+                "username": "B"
+            },
+            {
+                "username": "Charlie"
+            },
+            {
+                "username": "Gorgon zola",
+                "email": "io.sono@gmail.com"
+            }
+        ]
+    },
+    {
+        "username": "David",
+        "password": "password4",
+        "eta": 30,
+        "titolo studio": "Diploma di scuola superiore",
+        "utenti": [
+            {
+                "username": "Emma"
+            },
+            {
+                "username": "Frank"
+            }
+        ]
+    },
+    {
+        "username": "Grace",
+        "password": "password7",
+        "eta": 28,
+        "titolo studio": "Master in Informatica",
+        "utenti": [
+            {
+                "username": "Hannah"
+            },
+            {
+                "username": "Isaac"
+            }
+        ]
+    },
+    {
+        "username": "Buccia Gialla",
+        "password": "Basetta",
+        "email": "io.sono@gmail.com",
+        "titolo": "Pasticcere",
+        "eta": "18",
+        "utenti": []
+    },
+    {
+        "username": "Arlotti",
+        "password": "S",
+        "email": "io.sono@gmail.com",
+        "titolo": "Pasticcere",
+        "eta": "18",
+        "utenti": []
+    }
+]
